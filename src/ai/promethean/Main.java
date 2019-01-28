@@ -38,5 +38,10 @@ public class Main {
         Optimization o= new Optimization("Time", true);
         System.out.println(o);
 
+        Perturbation perturbation = new Perturbation();
+        perturbation.addProperty(np);
+        perturbation.addResource(r1);
+        System.out.println(perturbation);
+
     }
 }
