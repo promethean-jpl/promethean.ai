@@ -16,7 +16,22 @@ public class Main {
         System.out.println(r1.equals(r2));
 
         NumericalProperty np1= new NumericalProperty("doorOpen",1.0);
-        BooleanProperty np2= new BooleanProperty("doorOpen",  false);
+        BooleanProperty np2= new BooleanProperty("doorClosed",  false);
         System.out.println(np.equals(np2));
+
+        SystemState s= new SystemState(1);
+        s.addProperty(np1);
+
+        System.out.println(s.getProperties());
+        s.sortProperties();
+        System.out.println(s.getProperties());
+        s.addResource(r1);
+
+        SystemState s1= new SystemState(2);
+        s1.addProperty(np1);
+        s1.addProperty(np2);
+        s1.addResource(r1);
+        System.out.println(s.equals(s1));
+
     }
 }
