@@ -78,4 +78,11 @@ public class SystemState {
     public void sortResources(){
         Collections.sort(resources, new SortbyResource());
     }
+
+    @Override
+    public String toString() {
+        return "System State UID: " + this.UID + "\n Timestamp: " + this.timeStamp
+                + "\n Properties: " + properties
+                + "\n Resources: " + resources;
+    }
 }
