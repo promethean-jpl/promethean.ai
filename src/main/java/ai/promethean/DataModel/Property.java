@@ -18,8 +18,9 @@ public abstract class Property {
         return this.name;
     }
 
-
     public abstract String toString();
 
     public abstract Boolean equals(Property p);
+
+
 }
