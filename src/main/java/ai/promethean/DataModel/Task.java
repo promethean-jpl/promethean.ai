@@ -1,6 +1,5 @@
 package ai.promethean.DataModel;
 import java.util.*;
-import java.util.concurrent.locks.Condition;
 
 public class Task {
     private int UID;
@@ -8,14 +7,14 @@ public class Task {
 
     private ArrayList<Resource> resource_impacts=new ArrayList<Resource>();
     private ArrayList<Property> property_impacts=new ArrayList<Property>();
-    private ArrayList<Condition> requirements=new ArrayList<Condition>();
+    private ArrayList<ai.promethean.DataModel.Condition> requirements=new ArrayList<>();
 
     public Task(int _UID, int _duration){
         setUID(_UID);
-        setDuation(_duration);
+        setDuration(_duration);
     }
 
-    public void  setUID(int _UID){
+    public void setUID(int _UID){
         this.UID=_UID;
     }
 
@@ -23,7 +22,7 @@ public class Task {
         return this.UID;
     }
 
-    public void setDuation(int _duration){
+    public void setDuration(int _duration){
         this.duration=_duration;
     }
 
@@ -65,5 +64,5 @@ public class Task {
         property_impacts.add(new StringProperty(name, value));
     }
 
-    public void addRequirement(Condition c){ requirements.add(c);}
+    public void addRequirement(ai.promethean.DataModel.Condition c){ requirements.add(c);}
 }
