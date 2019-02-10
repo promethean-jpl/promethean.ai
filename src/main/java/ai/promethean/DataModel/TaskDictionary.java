@@ -20,4 +20,6 @@ public class TaskDictionary {
     }
 
     public Task getTask(Integer i) { return TaskDictionary.get(i); };
+
+    public int size() { return TaskDictionary.size(); }
 }
