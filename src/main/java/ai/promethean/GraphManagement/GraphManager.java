@@ -17,23 +17,25 @@ public class GraphManager {
     }
 
     private static ArrayList<Task> validTasks(SystemState state, TaskDictionary taskDictionary){
-        // For now let's I'll assume the taskDictionary has to be passed as argument
-        // TODO: Find all tasks that can be executed from state (is TaskDictionary global?)
+        ResourceMap resources = state.getResources();
+        PropertyMap properties = state.getProperties();
+        // For keeping track of valid tasks
         ArrayList<Task> valid_tasks = new ArrayList<>();
-        ArrayList<Resource> state_resources = state.getResources();
-        ArrayList<Property> state_props = state.getProperties();
         for(int i=0; i < taskDictionary.size(); i++) {
-            // I don't like the way this works, possible to mess up and add wrong tasks?
-            boolean possible_task = true;
+            boolean possible_task = false;
             Task current_task = taskDictionary.getTask(i);
             ArrayList<Condition> requirements = current_task.getRequirements();
             // I love IntelliJ
             for(Condition condition: requirements) {
-                // Get value of this resource/property from the current state
-                    // Issue: getting value can be Int, Bool, Double, etc...
-                    // Also Condition.eval only can evaluate doubles
-                // If the value doesn't pass condition.eval(), break out and go to next task
-                    // Or set a flag to tell logic after this loop to not add the task to valid_tasks array
+                String name = condition.getName();
+                double value = condition.getValue();
+                double resource_value = resources.getValue(name);
+                // ISSUE: condition.evaluate only does Doubles, extending props/res will break this
+                if(condition.evaluate(resource_value)) {
+                    possible_task = true;
+                } else {
+                    possible_task = false;
+                }
             }
             // If all conditions are satisfied, then add this task to the valid_tasks array
             if(possible_task) {
@@ -42,7 +44,7 @@ public class GraphManager {
 
         }
 
-        return null;
+        return valid_tasks;
     }
 
     private static ArrayList<StateTemplate> templateGeneration(SystemState state, ArrayList<Task> tasks){
