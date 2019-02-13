@@ -5,7 +5,6 @@ public class Resource {
     private String name;
     private Double value;
 
-
     public Resource(){
         setName("");
         setValue(0.0);
