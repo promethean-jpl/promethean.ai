@@ -44,7 +44,6 @@ public class GraphManager {
             }
         }
         return valid_tasks;
-    }
 
     private static ArrayList<StateTemplate> templateGeneration(SystemState state, ArrayList<Task> tasks){
         // TODO: Create templates for every task
@@ -52,8 +51,7 @@ public class GraphManager {
     }
 
     public static void addNeighbors(SystemState state) {
-        // *** This can be changed to not include taskDict as argument if implementation changes in future ***
-        ArrayList<Task> tasks = validTasks(state, taskDict);
+        ArrayList<Task> tasks = validTasks(state);
         ArrayList<StateTemplate> templates = templateGeneration(state, tasks);
         // TODO: Enqueue to frontier
     }
@@ -68,5 +66,4 @@ public class GraphManager {
         // TODO: return createState(template.previousState, template.task)
         return null;
     }
-
 }
