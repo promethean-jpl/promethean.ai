@@ -5,8 +5,7 @@ public class Task {
     private int UID;
     private int duration;
 
-    private ArrayList<Resource> resource_impacts=new ArrayList<Resource>();
-    private ArrayList<Property> property_impacts=new ArrayList<Property>();
+    private PropertyMap property_impacts= new PropertyMap();
     private ArrayList<ai.promethean.DataModel.Condition> requirements=new ArrayList<>();
 
     public Task(int _UID, int _duration){
@@ -30,38 +29,23 @@ public class Task {
         return this.duration;
     }
 
-    public ArrayList<Resource> getResource_impacts() {
-        return resource_impacts;
-    }
-
-    public ArrayList<Property> getProperty_impacts() {
+    public PropertyMap getProperty_impacts() {
         return property_impacts;
     }
     public ArrayList<Condition> getRequirements(){
         return requirements;
     }
 
-    public void addResource(Resource r){
-        resource_impacts.add(r);
-    }
-
-    public void addResource(String name, Double value){resource_impacts.add(new Resource(name,value));
-    }
-
-    public void addProperty(Property p){
-        property_impacts.add(p);
-    }
-
     public void addProperty(String name, Boolean value){
-        property_impacts.add(new BooleanProperty(name, value));
+        property_impacts.addProperty(name, value);
     }
 
     public void addProperty(String name, Double value){
-        property_impacts.add(new NumericalProperty(name, value));
+        property_impacts.addProperty(name, value);
     }
 
     public void addProperty(String name, String value){
-        property_impacts.add(new StringProperty(name, value));
+        property_impacts.addProperty(name, value);
     }
 
     public void addRequirement(ai.promethean.DataModel.Condition c){ requirements.add(c);}

@@ -19,7 +19,7 @@ public class TaskDictionary {
         return TaskDictionary.get(t.getUID());
     }
 
-    public Task getTask(Integer i) { return TaskDictionary.get(i); };
+    public Task getTask(Integer i) { return TaskDictionary.get(i); }
 
     public int size() { return TaskDictionary.size(); }
 }

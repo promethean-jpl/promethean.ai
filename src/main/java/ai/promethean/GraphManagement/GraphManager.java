@@ -17,7 +17,6 @@ public class GraphManager {
     }
 
     private static ArrayList<Task> validTasks(SystemState state, TaskDictionary taskDictionary){
-        ResourceMap resources = state.getResources();
         PropertyMap properties = state.getProperties();
         // For keeping track of valid tasks
         ArrayList<Task> valid_tasks = new ArrayList<>();
@@ -29,9 +28,11 @@ public class GraphManager {
             for(Condition condition: requirements) {
                 String name = condition.getName();
                 double value = condition.getValue();
-                double resource_value = resources.getValue(name);
-                // ISSUE: condition.evaluate only does Doubles, extending props/res will break this
-                if(condition.evaluate(resource_value)) {
+                Object state_value = state.getValue(name);
+                // ISSUE: condition.evaluate only does Doubles, extending props will break this
+                // Extend after merging other changes to handle different inputs
+                // Basically remove the (Double) cast right there, for now it won't compile without it
+                if(condition.evaluate((Double)state_value)) {
                     possible_task = true;
                 } else {
                     possible_task = false;
@@ -41,9 +42,7 @@ public class GraphManager {
             if(possible_task) {
                 valid_tasks.add(current_task);
             }
-
         }
-
         return valid_tasks;
     }
 
