@@ -45,7 +45,7 @@ public class PropertyMap {
 
     /* Returns the private property_map to be used to compare two PropertyMaps
      */
-    public Map<String, Property> getPropertyMap() {
+    private Map<String, Property> getPropertyMap() {
         return property_map;
     }
 
@@ -53,7 +53,7 @@ public class PropertyMap {
      * @param   name    The name of the property to get the value of
      * @return Property object with the given name, null otherwise
      */
-    public Property getValue(String name) {
+    public Property getProperty(String name) {
         return property_map.get(name);
     }
 

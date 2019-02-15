@@ -29,9 +29,15 @@ public class SystemState {
         return timeStamp;
     }
 
-    public PropertyMap getProperties() {
-        return properties;
+    public ArrayList<Property> getProperties() {
+        ArrayList<Property> property_list = new ArrayList<>();
+        for (String key : properties.getKeys()) {
+            property_list.add(properties.getProperty(key));
+        }
+        return property_list;
     }
+
+    public PropertyMap getPropertyMap() { return properties; }
 
     public void addProperty(String name, Boolean value) {
         properties.addProperty(name, value);
@@ -45,9 +51,8 @@ public class SystemState {
         properties.addProperty(name, value);
     }
 
-    public Object getValue(String name) {
-        Property return_object = properties.getValue(name);
-        return return_object;
+    public Property getProperty(String name) {
+        return properties.getProperty(name);
     }
 
     /*

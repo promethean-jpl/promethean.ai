@@ -17,7 +17,6 @@ public class GraphManager {
     }
 
     private static ArrayList<Task> validTasks(SystemState state, TaskDictionary taskDictionary){
-        PropertyMap properties = state.getProperties();
         // For keeping track of valid tasks
         ArrayList<Task> valid_tasks = new ArrayList<>();
         for(int i=0; i < taskDictionary.size(); i++) {
@@ -28,7 +27,7 @@ public class GraphManager {
             for(Condition condition: requirements) {
                 String name = condition.getName();
                 double value = condition.getValue();
-                Object state_value = state.getValue(name);
+                Object state_value = state.getProperty(name);
                 // ISSUE: condition.evaluate only does Doubles, extending props will break this
                 // Extend after merging other changes to handle different inputs
                 // Basically remove the (Double) cast right there, for now it won't compile without it

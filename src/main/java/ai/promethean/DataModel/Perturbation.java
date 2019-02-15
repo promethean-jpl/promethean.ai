@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Perturbation {
     private Time timeStamp;
-    private PropertyMap properties= new PropertyMap();
+    private ArrayList<Property> property_impacts = new ArrayList<>();
 
     public Perturbation(){
         timeStamp= new Time(System.currentTimeMillis());
@@ -19,25 +19,25 @@ public class Perturbation {
         return timeStamp;
     }
 
-    public PropertyMap getProperties() {
-        return properties;
+    public ArrayList<Property> getPropertyImpacts() {
+        return property_impacts;
     }
 
     public void addProperty(String name, Boolean value){
-        properties.addProperty(name, value);
+        property_impacts.add(new BooleanProperty(name, value));
     }
 
     public void addProperty(String name, Double value){
-        properties.addProperty(name, value);
+        property_impacts.add(new NumericalProperty(name, value));
     }
 
     public void addProperty(String name, String value){
-        properties.addProperty(name, value);
+        property_impacts.add(new StringProperty(name, value));
     }
 
     @Override
     public String toString() {
         return "Pertubation Timestamp: " + this.timeStamp
-                + "\n Property Changes: " + properties;
+                + "\n Property Changes: " + property_impacts;
     }
 }
