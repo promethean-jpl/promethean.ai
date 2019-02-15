@@ -15,30 +15,29 @@ public class GraphManager {
     public GraphManager() {
 
     }
-
     private static ArrayList<Task> validTasks(SystemState state, TaskDictionary taskDictionary){
         // For keeping track of valid tasks
         ArrayList<Task> valid_tasks = new ArrayList<>();
-        for(int i=0; i < taskDictionary.size(); i++) {
+        for (int i = 0; i < taskDictionary.size(); i++) {
             boolean possible_task = false;
             Task current_task = taskDictionary.getTask(i);
             ArrayList<Condition> requirements = current_task.getRequirements();
             // I love IntelliJ
-            for(Condition condition: requirements) {
+            for (Condition condition : requirements) {
                 String name = condition.getName();
                 double value = condition.getValue();
                 Object state_value = state.getProperty(name);
                 // ISSUE: condition.evaluate only does Doubles, extending props will break this
                 // Extend after merging other changes to handle different inputs
                 // Basically remove the (Double) cast right there, for now it won't compile without it
-                if(condition.evaluate((Double)state_value)) {
+                if (condition.evaluate((Double) state_value)) {
                     possible_task = true;
                 } else {
                     possible_task = false;
                 }
             }
             // If all conditions are satisfied, then add this task to the valid_tasks array
-            if(possible_task) {
+            if (possible_task) {
                 valid_tasks.add(current_task);
             }
         }
@@ -51,7 +50,6 @@ public class GraphManager {
     }
 
     public static void addNeighbors(SystemState state) {
-        // *** This can be changed to not include taskDict as argument if implementation changes in future ***
         ArrayList<Task> tasks = validTasks(state, taskDict);
         ArrayList<StateTemplate> templates = templateGeneration(state, tasks);
         // TODO: Enqueue to frontier
@@ -67,5 +65,4 @@ public class GraphManager {
         // TODO: return createState(template.previousState, template.task)
         return null;
     }
-
 }
