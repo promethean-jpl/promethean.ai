@@ -12,7 +12,7 @@ public class Task {
     private String name;
 
     private ArrayList<Property> property_impacts=new ArrayList<Property>();
-    private ArrayList<Condition> requirements=new ArrayList<Condition>();
+    private ArrayList<ai.promethean.DataModel.Condition> requirements=new ArrayList<>();
 
     public Task( int _duration){
         setUID();
