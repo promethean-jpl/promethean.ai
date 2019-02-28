@@ -9,7 +9,7 @@ import java.util.*;
 public class Perturbation {
     private int time;
     private String name;
-    private ArrayList<Property> property_impacts= new ArrayList<Property>();
+    private PropertyMap property_impacts = new PropertyMap();
 
     /**
      * Instantiates a new Perturbation. Defaults to have no name and to take effect at t=0
@@ -86,11 +86,11 @@ public class Perturbation {
     }
 
     /**
-     * Gets an ArrayList of Property impacts the Perturbation causes
+     * Gets a PropertyMap of Property impacts the Perturbation causes
      *
      * @return the properties
      */
-    public ArrayList<Property> getProperties() {
+    public PropertyMap getProperties() {
         return property_impacts;
     }
 
@@ -102,12 +102,7 @@ public class Perturbation {
      * @return A Property object with the given name, or Null if name was not found
      */
     public Property getProperty(String name){
-        for(Property p: property_impacts){
-            if(p.getName().equals(name)){
-                return p;
-            }
-        }
-        return null;
+        return this.property_impacts.getProperty(name);
     }
 
 
@@ -117,7 +112,7 @@ public class Perturbation {
      * @param p A fully formed Property object
      */
     public void addProperty(Property p){
-        property_impacts.add(p);
+        property_impacts.addProperty(p);
     }
 
 
@@ -129,7 +124,7 @@ public class Perturbation {
      * @param type  The type, either "assignment" or "delta"
      */
     public void addProperty(String name, Boolean value, String type){
-        property_impacts.add(new BooleanProperty(name, value,type));
+        property_impacts.addProperty(name, value,type);
     }
 
     /**
@@ -140,7 +135,7 @@ public class Perturbation {
      * @param type  The type, either "assignment" or "delta"
      */
     public void addProperty(String name, Double value, String type){
-        property_impacts.add(new NumericalProperty(name, value,type));
+        property_impacts.addProperty(name, value,type);
     }
 
     /**
@@ -151,14 +146,7 @@ public class Perturbation {
      * @param type  The type, either "assignment" or "delta"
      */
     public void addProperty(String name, String value, String type){
-        property_impacts.add(new StringProperty(name, value,type));
-    }
-
-    /**
-     * Sort properties
-     */
-    public void sortProperties(){
-        Collections.sort(property_impacts, new SortbyProperty());
+        property_impacts.addProperty(name, value,type);
     }
 
     @Override

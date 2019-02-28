@@ -91,15 +91,12 @@ public abstract class Property {
      */
     public abstract Object getValue();
 
-
     /**
      * Apply property impact onto property.
      *
      * @param p the p
      * @return the property
      */
-    public abstract Property applyPropertyImpactOnto(Property p);
-
-
+    public abstract Property applyImpact(Property p);
 
 }

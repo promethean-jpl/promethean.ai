@@ -5,19 +5,19 @@ package ai.promethean.DataModel;
  */
 public class Optimization {
     private String name;
-    private Boolean isMin;
+    private String type;
     private int priority;
 
     /**
      * Instantiates a new Optimization.
      *
      * @param _name     The name
-     * @param _isMin    Whether the optimization is a minimization or now
+     * @param type      Whether the optimization is a minimization or maximization
      * @param _priority The priority of the optimization, with 0 being the lowest
      */
-    public Optimization(String _name, Boolean _isMin, int _priority){
+    public Optimization(String _name, String type, int _priority){
         setName(_name);
-        setIsMin(_isMin);
+        setType(type);
         setPriority(_priority);
     }
 
@@ -40,21 +40,21 @@ public class Optimization {
     }
 
     /**
-     * Sets whether the Optimization is a minimization or now
+     * Sets the type of the Optimization
      *
-     * @param min True/False if the Optimization is min
+     * @param type The new type of the Optimization
      */
-    public void setIsMin(Boolean min) {
-        isMin = min;
+    public void setType(String type) {
+        this.type = type;
     }
 
     /**
-     * Gets whether the Optimization is a minimum or not
+     * Gets the type of the Optimization
      *
-     * @return True/False
+     * @return The Optimization type
      */
-    public Boolean getIsMin() {
-        return isMin;
+    public String getType() {
+        return this.type;
     }
 
     /**
@@ -65,6 +65,7 @@ public class Optimization {
     public void setName(String name) {
         this.name = name;
     }
+
 
     /**
      * Gets name
@@ -82,12 +83,12 @@ public class Optimization {
      * @return Boolean whether the input Optimization is the same
      */
     public Boolean equals(Optimization optimization){
-        return optimization.getName().equals(this.name) && optimization.getIsMin().equals(this.isMin);
+        return optimization.getName().equals(this.name) && optimization.getType().equals(this.type);
     }
 
     @Override
     public String toString() {
-        if(isMin)
+        if(type == "min")
             return "Optimization Name: " +name + " Type: Minimize Priority: " + priority;
         else
             return "Optimization Name: " +name + " Type: Maximize Priority: " + priority;

@@ -1,4 +1,5 @@
 package ai.promethean.DataModel;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -13,49 +14,53 @@ public class PropertyMap {
      * Instantiates a new Property map.
      */
     public PropertyMap() {}
-
-    /**
-     * Add a BooleanProperty to the PropertyMap. If a property already has the name specified, the value will be updated
-     *
-     * @param name  The name
-     * @param value The value
-     */
-    public void addProperty(String name, Boolean value) {
-        Property new_prop = new BooleanProperty(name, value);
-        if(property_map.containsKey(name)) {
-            property_map.replace(name, new_prop);
-        } else {
-            property_map.put(name, new_prop);
+    public PropertyMap(PropertyMap propertyMap) {
+        for (Property p: propertyMap.getProperties() ) {
+            this.addProperty(p);
         }
     }
 
     /**
-     * Add a NumericalProperty to the PropertyMap. If a property already has the name specified, the value will be updated
+     * Add a BooleanProperty to the PropertyMap. If a property already has the name specified, an error is thrown
      *
      * @param name  The name
      * @param value The value
      */
-    public void addProperty(String name, Double value) {
-        Property new_prop = new NumericalProperty(name, value);
+
+    public void addProperty(String name, Boolean value, String type) {
         if(property_map.containsKey(name)) {
-            property_map.replace(name, new_prop);
+            throw new IllegalArgumentException("Properties should never be mutated.");
         } else {
-            property_map.put(name, new_prop);
+            property_map.put(name, new BooleanProperty(name, value, type));
         }
     }
 
     /**
-     * Add a StringProperty to the PropertyMap. If a property already has the name specified, the value will be updated
+     * Add a NumericalProperty to the PropertyMap. If a property already has the name specified, an error is thrown
      *
      * @param name  The name
      * @param value The value
      */
-    public void addProperty(String name, String value) {
-        Property new_prop = new StringProperty(name, value);
+
+    public void addProperty(String name, Double value, String type) {
         if(property_map.containsKey(name)) {
-            property_map.replace(name, new_prop);
+            throw new IllegalArgumentException("Properties should never be mutated.");
         } else {
-            property_map.put(name, new_prop);
+            property_map.put(name, new NumericalProperty(name, value, type));
+        }
+    }
+
+    /**
+     * Add a StringProperty to the PropertyMap. If a property already has the name specified, an error is thrown
+     *
+     * @param name  The name
+     * @param value The value
+     */
+    public void addProperty(String name, String value, String type) {
+        if(property_map.containsKey(name)) {
+            throw new IllegalArgumentException("Properties should never be mutated.");
+        } else {
+            property_map.put(name, new StringProperty(name, value, type));
         }
     }
 
@@ -65,9 +70,8 @@ public class PropertyMap {
      * @param p The property to add
      */
     public void addProperty(Property p) {
-
         if(property_map.containsKey(p.getName())) {
-            property_map.replace(p.getName(), p);
+            throw new IllegalArgumentException("Properties should never be mutated.");
         } else {
             property_map.put(p.getName(), p);
         }
@@ -112,6 +116,19 @@ public class PropertyMap {
     }
 
     /**
+     * Retrieves an ArrayList of all Property objects in the PropertyMap
+     *
+     * @return ArrayList of Property objects
+     */
+    public ArrayList<Property> getProperties() {
+        ArrayList<Property> properties =  new ArrayList<>();
+        for (String key : this.getKeys()) {
+            properties.add(getProperty(key));
+        }
+        return properties;
+    }
+
+    /**
      * Used to compare two PropertyMaps. Returns true if they are the same map, false otherwise. This includes the Property mapped to the name
      *
      * @param p the PropertyMap to compare to this one
@@ -121,11 +138,12 @@ public class PropertyMap {
         return property_map.equals(p.getPropertyMap());
     }
 
+
     @Override
     public String toString() {
         String printOut="";
         for(Property p : property_map.values()){
-            printOut=printOut + "\n Name: "+ p.getName()+ "Type: " +p.getType()+ " Value: " + p.getValue();
+            printOut=printOut + "\n Name: "+ p.getName()+ " Type: " +p.getType()+ " Value: " + p.getValue();
         }
         return printOut;
     }

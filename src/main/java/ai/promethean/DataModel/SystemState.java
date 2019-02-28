@@ -101,6 +101,16 @@ public class SystemState {
     }
 
     /**
+     * Sets the SystemState properties to the given PropertyMap
+     *
+     * @param propertyMap The PropertyMap to assign to the SystemState
+     */
+    public void setPropertyMap(PropertyMap propertyMap) {
+        this.properties = propertyMap;
+    }
+
+
+    /**
      * Gets the SystemState property map.
      *
      * @return The PropertyMap
@@ -152,7 +162,7 @@ public class SystemState {
      * @param value The value
      */
     public void addProperty(String name, Boolean value) {
-        properties.addProperty(name, value);
+        properties.addProperty(name, value, null);
     }
 
 
@@ -163,7 +173,7 @@ public class SystemState {
      * @param value The value
      */
     public void addProperty(String name, Double value) {
-        properties.addProperty(name, value);
+        properties.addProperty(name, value, null);
     }
 
     /**
@@ -173,7 +183,7 @@ public class SystemState {
      * @param value The value
      */
     public void addProperty(String name, String value) {
-        properties.addProperty(name, value);
+        properties.addProperty(name, value, null);
     }
 
     /**

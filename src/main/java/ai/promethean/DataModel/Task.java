@@ -14,7 +14,7 @@ public class Task {
     private int duration;
     private String name;
 
-    private ArrayList<Property> property_impacts=new ArrayList<Property>();
+    private PropertyMap property_impacts=new PropertyMap();
     private ArrayList<ai.promethean.DataModel.Condition> requirements=new ArrayList<>();
 
     /**
@@ -94,10 +94,23 @@ public class Task {
     /**
      * Gets property impacts.
      *
-     * @return An ArrayList of Property objects representing the impacts
+     * @return A PropertyMap of all properties in the Task
      */
-    public ArrayList<Property> getProperty_impacts() {
+    public PropertyMap getProperty_impacts() {
         return property_impacts;
+    }
+
+    /**
+     * Gets an ArrayList of the Property objects in the Task
+     *
+     * @return ArrayList of Property objects
+     */
+    public ArrayList<Property> getProperties() {
+        ArrayList<Property> property_list = new ArrayList<>();
+        for (String key : property_impacts.getKeys()) {
+            property_list.add(property_impacts.getProperty(key));
+        }
+        return property_list;
     }
 
     /**
@@ -116,12 +129,7 @@ public class Task {
      * @return The Property object found, or Null if no Property was found with the given name
      */
     public Property getProperty(String name){
-        for(Property p: property_impacts){
-            if(p.getName().equals(name)){
-                return p;
-            }
-        }
-        return null;
+        return this.property_impacts.getProperty(name);
     }
 
     /**
@@ -145,7 +153,7 @@ public class Task {
      * @param p The valid Property object to ass to property_impacts
      */
     public void addProperty(Property p){
-        property_impacts.add(p);
+        property_impacts.addProperty(p);
     }
 
     /**
@@ -156,7 +164,7 @@ public class Task {
      * @param type  The type
      */
     public void addProperty(String name, Boolean value, String type){
-        property_impacts.add(new BooleanProperty(name, value,type));
+        property_impacts.addProperty(name, value, type);
     }
 
     /**
@@ -167,7 +175,7 @@ public class Task {
      * @param type  The type
      */
     public void addProperty(String name, Double value, String type){
-        property_impacts.add(new NumericalProperty(name, value,type));
+        property_impacts.addProperty(name, value, type);
     }
 
     /**
@@ -178,7 +186,7 @@ public class Task {
      * @param type  The type
      */
     public void addProperty(String name, String value, String type){
-        property_impacts.add(new StringProperty(name, value,type));
+        property_impacts.addProperty(name, value, type);
     }
 
     /**
