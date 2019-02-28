@@ -42,9 +42,12 @@ public class BooleanCondition extends Condition {
     public boolean evaluate(Object val1) {
         if(val1 instanceof Boolean){
             switch (this.operator){
-                case("=="): return val1.equals(this.value);
-                case("!="): return !val1.equals(this.value);
-                default: return false;
+                case("=="):
+                    return val1.equals(this.value);
+                case("!="):
+                    return !val1.equals(this.value);
+                default:
+                    return false;
             }
         }else return false;
     }

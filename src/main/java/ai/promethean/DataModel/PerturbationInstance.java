@@ -1,17 +1,17 @@
 package ai.promethean.DataModel;
 
 /**
- * The type Perturbation instance.
+ * Used to keep track of SystemState changes due to Perturbations. A PerturbationInstance will include a previous SystemState which the system was in before a Perturbation took place, and the Perturbation that caused the state change
  */
 public class PerturbationInstance {
     private SystemState previousSystemState;
     private Perturbation perturbation;
 
     /**
-     * Instantiates a new Perturbation instance.
+     * Instantiates a new Perturbation instance
      *
-     * @param _prevSystemState the prev system state
-     * @param _perturbation    the perturbation
+     * @param _prevSystemState The previous SystemState
+     * @param _perturbation    The Perturbation
      */
     public PerturbationInstance(SystemState _prevSystemState, Perturbation _perturbation){
         setPerturbation(_perturbation);
@@ -19,36 +19,36 @@ public class PerturbationInstance {
     }
 
     /**
-     * Sets perturbation.
+     * Sets Perturbation
      *
-     * @param perturbation the perturbation
+     * @param perturbation The Perturbation
      */
     public void setPerturbation(Perturbation perturbation) {
         this.perturbation = perturbation;
     }
 
     /**
-     * Sets previous system state.
+     * Sets previous SystemState
      *
-     * @param previousSystemState the previous system state
+     * @param previousSystemState The previous SystemState
      */
     public void setPreviousSystemState(SystemState previousSystemState) {
         this.previousSystemState = previousSystemState;
     }
 
     /**
-     * Gets perturbation.
+     * Gets the Perturbation
      *
-     * @return the perturbation
+     * @return The Perturbation
      */
     public Perturbation getPerturbation() {
         return perturbation;
     }
 
     /**
-     * Gets previous system state.
+     * Gets previous SystemState
      *
-     * @return the previous system state
+     * @return The previous SystemState
      */
     public SystemState getPreviousSystemState() {
         return previousSystemState;
@@ -61,9 +61,9 @@ public class PerturbationInstance {
     }
 
     /**
-     * Apply perturbation system state.
+     * Apply perturbation to the SystemState
      *
-     * @return the system state
+     * @return The SystemState after applying the Perturbation to the previous state
      */
     public SystemState applyPerturbation(){
         //TODO When ready: this function can be implemented to create a new state by applying perturbation to prev state

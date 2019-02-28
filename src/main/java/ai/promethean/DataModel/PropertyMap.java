@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * A Map of <name, Property object> to easily retrieve a Property with a given name
+ * A Map of (name, Property object) to easily retrieve a Property with a given name
  */
 public class PropertyMap {
     private Map<String, Property> property_map = new HashMap<>();

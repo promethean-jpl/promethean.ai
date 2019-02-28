@@ -1,17 +1,17 @@
 package ai.promethean.DataModel;
 
 /**
- * The type Task instance.
+ * Used to keep track of value changes in SystemStates. A TaskInstance will include a previous SystemState and the Task executed in that state to transition in forward in the plan. To be used in the planning algorithm to be able to backtrack in a plan
  */
 public class TaskInstance {
     private SystemState prevSystemState;
     private Task task;
 
     /**
-     * Instantiates a new Task instance.
+     * Instantiates a new TaskInstance with the given SystemState and Task
      *
-     * @param _prevSystemState the prev system state
-     * @param _task            the task
+     * @param _prevSystemState The previous SystemState
+     * @param _task            The Task
      */
     public TaskInstance(SystemState _prevSystemState, Task _task){
         setTask(_task);
@@ -19,36 +19,36 @@ public class TaskInstance {
     }
 
     /**
-     * Sets previous system state.
+     * Sets previous SystemState
      *
-     * @param _previousSystemState the previous system state
+     * @param _previousSystemState The previous SystemState
      */
     public void setPreviousSystemState(SystemState _previousSystemState) {
         this.prevSystemState = _previousSystemState;
     }
 
     /**
-     * Set task.
+     * Set Task
      *
-     * @param _task the task
+     * @param _task The Task
      */
     public void setTask(Task _task){
         this.task = _task;
     }
 
     /**
-     * Gets prev system state.
+     * Gets previous SystemState
      *
-     * @return the prev system state
+     * @return The previous SystemState
      */
     public SystemState getPrevSystemState() {
         return prevSystemState;
     }
 
     /**
-     * Get task task.
+     * Get the executed Task
      *
-     * @return the task
+     * @return The Task
      */
     public Task getTask(){
         return task;

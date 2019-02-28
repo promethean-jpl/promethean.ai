@@ -2,7 +2,7 @@ package ai.promethean.DataModel;
 import java.util.*;
 
 /**
- * A Map of <UID, Task object> pairs to quickly access Tasks
+ * A Map of (UID, Task object) pairs to quickly access Tasks
  */
 public class TaskDictionary {
     private Map<Integer, Task> TaskDictionary = new HashMap<Integer, Task>();
